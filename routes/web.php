@@ -13,5 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','GuzzleController@getСitiesData');
+Route::get('/','GuzzleController@homeController')->name('home');
 
+Route::post('/give',  'GuzzleController@giveСities');
+
+Route::post('/route',  'GuzzleController@getRouteData')->name('route');

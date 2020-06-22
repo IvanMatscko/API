@@ -61,6 +61,14 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            .form-group label {
+            }
+            .form_add {
+                justify-content: space-around;
+                align-items: center;
+                flex-direction: row;
+                display: flex;
+            }
         </style>
     </head>
     <body>
@@ -83,21 +91,36 @@
                 <div class="title m-b-md">
                    API
                 </div>
+                <form class="form_add" action="route" method="POST">
+                    {{ csrf_field() }}
+                    <h2>Создать билет</h2>
+                    <div class="form-group">
+                        <label>Откуда</label>
+                        <select name="id_from" class="form-control options">
+                            <option class="first">Выбрать</option>
+                            @foreach ($cities as $row)
+                                <p style="display: inline">{{ $row["point_latin_name"] }}</p>
+                                <option name="id_from" value="{{ $row["point_id"] }}">{{ $row["point_latin_name"] }}</option>
+                            @endforeach
+                        </select>
+                        <label>-></label>
+                    </div>
+                    <div class="form-group">
+                        <label>-> Куда</label>
+                        <select name="id_to" class="form-control options">
+                            <option class="first">Выбрать</option>
+                            @foreach ($cities as $row)
+                                <p style="display: inline">{{ $row["point_latin_name"] }}</p>
+                                <option name="id_to" value="{{ $row["point_id"] }}">{{ $row["point_latin_name"] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <div class="but"><button type="submit">Сохранить</button></div>
+                    </div>
+                </form>
 
-                <div class="links" style="text-align: left">
-                    <h3>Список рейсов </h3>
-                    @foreach ($routs as $row)
-                        <div style="border-bottom: 1px solid #000000;">
-                            <div><span style="font-weight: 600;">Маршрут -</span> {{ $row["route_name"] }}</div>
-                            <div><span style="font-weight: 600;">Дата отправления -</span> {{ $row["date_from"] }}</div>
-                            <div><span style="font-weight: 600;">Время отправления -</span> {{ $row["time_from"] }}</div>
-                            <div><span style="font-weight: 600;">Откуда -</span> {{ $row["point_from"] }}</div>
-                            <div><span style="font-weight: 600;">Дата прибытия -</span> {{ $row["date_to"] }}</div>
-                            <div><span style="font-weight: 600;">Время прибытия -</span> {{ $row["time_to"] }}</div>
-                            <div><span style="font-weight: 600;">Куда -</span> {{ $row["point_to"] }}</div>
-                        </div>
-                    @endforeach
-                </div>
+
                 <div style="display: inline;">
                     <h3 style="text-align: left">Список городов</h3>
                     @foreach ($cities as $row)
